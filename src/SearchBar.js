@@ -1,10 +1,36 @@
 import React, { Component } from 'react';
 
 class SearchBar extends Component {
+    formatQueryParams(params) {
+        const queryItems = Object.keys(params)
+          .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+            return queryItems.join('&');
+    }
+    
     handleSubmit = event => {
         console.log(`'handleSubmit' ran`);
         event.preventDefault();
-        //this.props.setSearch(event.target.value)
+        
+        //pressing the submit button starts the fetch call
+
+        const params = {
+            q: this.props.search,
+            language: "en",
+        };
+        const queryString = this.formatQueryParams(params)
+        console.log(queryString)
+        const url = 'https://www.googleapis.com/books/v1/volumes?' + queryString       
+
+        fetch (url)
+            .then(response => {
+                if (response.ok) {
+                    return response.json() 
+                }
+                throw new Error(`Something went wrong: ${response.statusText}`)
+            })
+            .then(responseJson => this.props.setBooks(responseJson.items))
+            .catch(err => console.log(err));
+            
     }
 
     handleChange = event => {

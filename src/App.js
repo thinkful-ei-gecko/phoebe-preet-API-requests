@@ -224,6 +224,11 @@ class App extends Component {
     console.log(this.state.search)
   }
 
+  setBooks = array => {
+    this.setState({books:array})
+    console.log(this.state.books)
+  }
+
   render() {
     return (
       <div className="app">
@@ -231,12 +236,15 @@ class App extends Component {
         <SearchBar 
           books={this.state.books}
           setSearch={(term) => this.setSearch(term)}
+          setBooks={(array) => this.setBooks(array)}
           search={this.state.search}
           //setSearch={this.setSearch}
         />
         <PrintType />
         <Filter />
-        <BookList books={this.state.books}/>
+        <BookList 
+          books={this.state.books}
+        />
       </div>
     );
   }

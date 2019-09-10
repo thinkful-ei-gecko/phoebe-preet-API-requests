@@ -9,19 +9,20 @@ class BookList extends Component {
                 {this.props.books.map(book => {
                     return (
                         <Book 
+                            key={book.id}
                             img={book.volumeInfo.imageLinks.smallThumbnail}
                             title={book.volumeInfo.title}
-                            author={book.volumeInfo.authors.join(',')}
-                            price={book.saleInfo.listPrice.amount}
+                            author={book.volumeInfo.authors}
+                            saleInfo={book.saleInfo}
+                            // price={book.saleInfo.listPrice.amount}
+                            // {book.saleInfo.listPrice ? '$' + book.saleInfo.listPrice.amount : ''}
                             description={book.volumeInfo.description}
                         />
                     )
                 })}
             </ul>
-        )
+        )     
     }
-
-
 }
 
 export default BookList;
