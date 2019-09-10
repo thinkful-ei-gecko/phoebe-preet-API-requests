@@ -4,6 +4,7 @@ class SearchBar extends Component {
     handleSubmit = event => {
         console.log(`'handleSubmit' ran`);
         event.preventDefault();
+        //this.props.setSearch(event.target.value)
     }
 
     handleChange = event => {
