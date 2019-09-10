@@ -5,11 +5,11 @@ class Book extends Component {
     render(){
         return (
             <li>
-                <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="google logo" />
-                <h2>Title</h2>
-                <p>Author</p>
-                <p>Price</p>
-                <p>Description</p>
+                <img src={this.props.img} alt={this.props.title} />
+                <h2>{this.props.title}</h2>
+                <p>Author: {this.props.author}</p>
+                <p>Price: ${this.props.price}</p>
+                <p>{this.props.description}</p>
             </li>
 
         )

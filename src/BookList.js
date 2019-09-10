@@ -6,7 +6,17 @@ class BookList extends Component {
     render(){
         return (
             <ul>
-                <Book />
+                {this.props.books.map(book => {
+                    return (
+                        <Book 
+                            img={book.volumeInfo.imageLinks.smallThumbnail}
+                            title={book.volumeInfo.title}
+                            author={book.volumeInfo.authors.join(',')}
+                            price={book.saleInfo.listPrice.amount}
+                            description={book.volumeInfo.description}
+                        />
+                    )
+                })}
             </ul>
         )
     }
