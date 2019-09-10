@@ -219,29 +219,26 @@ class App extends Component {
     }
   }
 
-    setSearch(term) {
-      this.setState ({search:term});
-    }
-  
+  setSearch = term => {
+    this.setState ({search:term});
+    console.log(this.state.search)
+  }
 
-  
-
-    render() {
-        return (
-          <div className="app">
-            <h1>Book Search</h1>
-            <SearchBar 
-              books={this.state.books}
-              search={this.state.search}
-              setSearch={this.setSearch}
-            />
-            <PrintType />
-            <Filter />
-            <BookList books={this.state.books}/>
-          </div>
-       
-        );
-    }
+  render() {
+    return (
+      <div className="app">
+        <h1>Book Search</h1>
+        <SearchBar 
+          books={this.state.books}
+          search={this.state.search}
+          setSearch={this.setSearch}
+        />
+        <PrintType />
+        <Filter />
+        <BookList books={this.state.books}/>
+      </div>
+    );
+  }
 }
 
 export default App;
