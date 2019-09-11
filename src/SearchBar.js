@@ -17,7 +17,7 @@ class SearchBar extends Component {
         //DEFAULT FILTER VALUES RESET: 
         //As this fetch call doesn't include parameters for the filter or printType value
         const params = {
-            q: this.state.props.search,
+            q: this.props.state.search,
             language: "en",
         };
         const queryString = this.formatQueryParams(params)
@@ -37,11 +37,11 @@ class SearchBar extends Component {
     }
 
     handleChange = event => {
-        console.log(`'handleChange' ran`);
-        console.log(`'handleChange' value of search term: ${event.target.value}`);
+        // console.log(`'handleChange' ran`);
+        // console.log(`'handleChange' value of search term: ${event.target.value}`);
         let searchTerm = event.target.value;
         this.props.setSearch(searchTerm);
-        console.log(this.props.search)
+        // console.log(this.props.search)
     }
 
     render(){
