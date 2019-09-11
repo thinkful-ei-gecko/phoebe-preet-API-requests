@@ -240,6 +240,7 @@ class App extends Component {
     console.log(`this.state.printType value: ${this.state.printType}`)
   }
 
+  //componentDidMount - fetch request method goes here - remove from individual components
 
   render() {
     return (

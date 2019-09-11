@@ -7,18 +7,23 @@ class Filter extends Component {
             return queryItems.join('&');
     }
 
-    handleChange = value => {
+    handleChange = event => {
         //event.preventDefault();
-        this.props.setFilter(value);
+        this.props.setFilter(event.target.value);
+        console.log(event.target.value);
+    }
 
+    componentDidMount(){
         const params = {
             q: this.props.search,
             filter: this.props.filter,
             language: "en"
         };
+        console.log(this.props.filter);
         const queryString = this.formatQueryParams(params)
         
-        const url = 'https://www.googleapis.com/books/v1/volumes?' + queryString       
+        const url = 'https://www.googleapis.com/books/v1/volumes?' + queryString   
+        console.log(url);     
 
         fetch (url)
             .then(response => {
@@ -30,7 +35,7 @@ class Filter extends Component {
             .then(responseJson => this.props.setBooks(responseJson.items))
             .catch(err => console.log(err));
     }
-
+    
     render(){
         return(
             <div>
@@ -47,5 +52,6 @@ class Filter extends Component {
         )
     }
 }
+
 
 export default Filter

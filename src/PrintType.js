@@ -7,10 +7,11 @@ class PrintType extends Component {
             return queryItems.join('&');
     }
 
-    handleChange = value => {
+    handleChange = event => {
         //event.preventDefault();
         console.log('handleChange on PrintType.js ran')
-        this.props.setType(value);
+        this.props.setType(event.target.value);
+        console.log(event.target.value);
 
         const params = {
             q: this.props.search,
@@ -18,7 +19,8 @@ class PrintType extends Component {
             language: "en"
         };
         const queryString = this.formatQueryParams(params)
-        const url = 'https://www.googleapis.com/books/v1/volumes?' + queryString       
+        const url = 'https://www.googleapis.com/books/v1/volumes?' + queryString     
+        console.log(url);  
 
         console.log(queryString);
 
