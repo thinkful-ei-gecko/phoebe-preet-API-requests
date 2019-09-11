@@ -247,21 +247,21 @@ class App extends Component {
         <h1>Book Search</h1>
         <SearchBar 
           books={this.state.books}
+          search={this.state.search}
           setSearch={(term) => this.setSearch(term)}
           setBooks={(array) => this.setBooks(array)}
-          search={this.state.search}
         />
         <PrintType 
           books={this.state.books}
-          // search={this.state.search}
-          state={this.state}
+          search={this.state.search}
+          printType={this.state.printType}
           setBooks={(array) => this.setBooks(array)}
           setType={(type) => this.setType(type)}
         />
         <Filter
           books={this.state.books}
-          // search={this.state.search}
-          state={this.state}
+          search={this.state.search}
+          filter={this.state.filter}
           setBooks={(array) => this.setBooks(array)}
           setFilter={(filter) => this.setFilter(filter)}
          />

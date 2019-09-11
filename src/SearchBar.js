@@ -17,7 +17,7 @@ class SearchBar extends Component {
         //DEFAULT FILTER VALUES RESET: 
         //As this fetch call doesn't include parameters for the filter or printType value
         const params = {
-            q: this.props.state.search,
+            q: this.props.search,
             language: "en",
         };
         const queryString = this.formatQueryParams(params)

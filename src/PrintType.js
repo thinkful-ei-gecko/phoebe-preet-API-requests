@@ -13,8 +13,8 @@ class PrintType extends Component {
         this.props.setType(value);
 
         const params = {
-            q: this.props.state.search,
-            printType: this.props.state.PrintType,
+            q: this.props.search,
+            printType: this.props.printType,
             language: "en"
         };
         const queryString = this.formatQueryParams(params)
