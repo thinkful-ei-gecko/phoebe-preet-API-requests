@@ -9,15 +9,18 @@ class PrintType extends Component {
 
     handleChange = value => {
         //event.preventDefault();
+        console.log('handleChange on PrintType.js ran')
         this.props.setType(value);
 
         const params = {
-            q: this.props.search,
-            language: "en",
+            q: this.props.state.search,
+            printType: this.props.state.PrintType,
+            language: "en"
         };
         const queryString = this.formatQueryParams(params)
-        
         const url = 'https://www.googleapis.com/books/v1/volumes?' + queryString       
+
+        console.log(queryString);
 
         fetch (url)
             .then(response => {

@@ -214,7 +214,7 @@ class App extends Component {
       //  ],
       books: [],
       search: '',
-      printType:'', 
+      printType: 'all', 
       filter: '',
       error: null
     }
@@ -232,10 +232,12 @@ class App extends Component {
 
   setFilter = filter => {
     this.setState ({filter:filter});
+    console.log(`this.state.filter value: ${this.state.filter}`)
   }
 
   setType = type => {
     this.setState ({printType:type});
+    console.log(`this.state.printType value: ${this.state.printType}`)
   }
 
 
@@ -251,13 +253,15 @@ class App extends Component {
         />
         <PrintType 
           books={this.state.books}
-          search={this.state.search}
+          // search={this.state.search}
+          state={this.state}
           setBooks={(array) => this.setBooks(array)}
           setType={(type) => this.setType(type)}
         />
         <Filter
           books={this.state.books}
-          search={this.state.search}
+          // search={this.state.search}
+          state={this.state}
           setBooks={(array) => this.setBooks(array)}
           setFilter={(filter) => this.setFilter(filter)}
          />

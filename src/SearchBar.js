@@ -11,10 +11,13 @@ class SearchBar extends Component {
         console.log(`'handleSubmit' ran`);
         event.preventDefault();
         
-        //pressing the submit button starts the fetch call
+        //pressing the submit button starts the fetch call (although the value is still
+        // being returned with onChange)
 
+        //DEFAULT FILTER VALUES RESET: 
+        //As this fetch call doesn't include parameters for the filter or printType value
         const params = {
-            q: this.props.search,
+            q: this.state.props.search,
             language: "en",
         };
         const queryString = this.formatQueryParams(params)

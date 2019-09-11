@@ -13,7 +13,8 @@ class Filter extends Component {
 
         const params = {
             q: this.props.search,
-            language: "en",
+            filter: this.props.filter,
+            language: "en"
         };
         const queryString = this.formatQueryParams(params)
         
