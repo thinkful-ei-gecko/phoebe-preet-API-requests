@@ -214,7 +214,7 @@ class App extends Component {
       //  ],
       books: [],
       search: '',
-      printType: 'all', 
+      printType: '', 
       filter: '',
       error: null
     }
@@ -248,8 +248,8 @@ class App extends Component {
         <SearchBar 
           books={this.state.books}
           search={this.state.search}
-          setSearch={(term) => this.setSearch(term)}
           setBooks={(array) => this.setBooks(array)}
+          setSearch={(term) => this.setSearch(term)}
         />
         <PrintType 
           books={this.state.books}

@@ -22,6 +22,7 @@ class Book extends Component {
                 <p>Author: {this.props.author ? this.props.author : 'Unknown'}</p>
                 <p>Price: {this.renderPriceOptions()}</p>
                 <p>{this.props.description ? this.props.description : 'Book description unavailable.'}</p>
+                <hr />
             </li>
 
         )
