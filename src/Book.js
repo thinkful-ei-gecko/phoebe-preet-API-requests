@@ -14,7 +14,7 @@ class Book extends Component {
     }
 
     render(){
-        console.log(this.props.price)
+        //console.log(this.props.price)
         return (
             <li>
                 <img src={this.props.img} alt={this.props.title} />

@@ -215,7 +215,8 @@ class App extends Component {
       books: [],
       search: '',
       printType:'', 
-      filter: ''
+      filter: '',
+      error: null
     }
   }
 
@@ -225,9 +226,18 @@ class App extends Component {
   }
 
   setBooks = array => {
-    this.setState({books:array})
+    this.setState ({books:array});
     console.log(this.state.books)
   }
+
+  setFilter = filter => {
+    this.setState ({filter:filter});
+  }
+
+  setType = type => {
+    this.setState ({printType:type});
+  }
+
 
   render() {
     return (
@@ -238,10 +248,19 @@ class App extends Component {
           setSearch={(term) => this.setSearch(term)}
           setBooks={(array) => this.setBooks(array)}
           search={this.state.search}
-          //setSearch={this.setSearch}
         />
-        <PrintType />
-        <Filter />
+        <PrintType 
+          books={this.state.books}
+          search={this.state.search}
+          setBooks={(array) => this.setBooks(array)}
+          setType={(type) => this.setType(type)}
+        />
+        <Filter
+          books={this.state.books}
+          search={this.state.search}
+          setBooks={(array) => this.setBooks(array)}
+          setFilter={(filter) => this.setFilter(filter)}
+         />
         <BookList 
           books={this.state.books}
         />
