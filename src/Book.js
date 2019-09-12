@@ -17,7 +17,7 @@ class Book extends Component {
         //console.log(this.props.price)
         return (
             <li>
-                <img src={this.props.img ? this.props.img : ''} alt={this.props.title} />
+                <img src={this.props.img ? this.props.img.smallThumbnail : ''} alt={this.props.title} />
                 <h2>{this.props.title ? this.props.title : 'Unknown'}</h2>
                 <p>Author: {this.props.author ? this.props.author : 'Unknown'}</p>
                 <p>Price: {this.renderPriceOptions()}</p>

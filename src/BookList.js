@@ -10,7 +10,7 @@ class BookList extends Component {
                     return (
                         <Book 
                             key={book.id}
-                            img={book.volumeInfo.imageLinks.smallThumbnail}
+                            img={book.volumeInfo.imageLinks}
                             title={book.volumeInfo.title}
                             author={book.volumeInfo.authors}
                             saleInfo={book.saleInfo}
