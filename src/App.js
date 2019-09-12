@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import './App.css';
-import BookList from './BookList';
-import PrintType from './PrintType';
-import Filter from './Filter';
-import SearchBar from './SearchBar';
+import React, { Component } from "react";
+import "./App.css";
+import BookList from "./BookList";
+import PrintType from "./PrintType";
+import Filter from "./Filter";
+import SearchBar from "./SearchBar";
 
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       // books: [
@@ -213,32 +213,67 @@ class App extends Component {
       //   }
       //  ],
       books: [],
-      search: '',
-      printType: 'all', 
-      filter: '',
+      search: "",
+      printType: "all",
+      filter: undefined,
       error: null
+    };
+  }
+
+  formatQueryParams(params) {
+    const queryItems = Object.keys(params).map(
+      key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
+    );
+    return queryItems.join("&");
+  }
+
+  fetchBooklist() {
+    let params;
+    
+    //Conditional in case filters isn't selected: it shouldn't be returned in the
+    //params (it's weird)
+    if (this.state.filter === undefined) {
+      params = {
+        q: this.state.search,
+        printType: this.state.printType,
+        language: "en"
+      };
+    } else {
+      params = {
+        q: this.state.search,
+        printType: this.state.printType,
+        filter: this.state.filter,
+        language: "en"
+      };
     }
+
+    const queryString = this.formatQueryParams(params);
+    const url = "https://www.googleapis.com/books/v1/volumes?" + queryString;
+
+    fetch(url)
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error(`Something went wrong: ${response.statusText}`);
+      })
+      .then(responseJson => this.setState({ books: responseJson.items }) )
+      .catch(err => console.log(err));
   }
 
-  setSearch = term => {
-    this.setState ({search:term});
-    console.log(this.state.search)
-  }
+  handleSearch = (term) => {
+    this.setState({ search: term }, this.fetchBooklist);
+    console.log(this.state.search);
+  };
 
-  setBooks = array => {
-    this.setState ({books:array});
-    console.log(this.state.books)
-  }
+  handleFilter = value => {
+    this.setState({ filter: value }, this.fetchBooklist);
+  };
 
-  setFilter = filter => {
-    this.setState ({filter:filter});
-    console.log(`this.state.filter value: ${this.state.filter}`)
-  }
-
-  setType = type => {
-    this.setState ({printType:type});
-    console.log(`this.state.printType value: ${this.state.printType}`)
-  }
+  handlePrintType = type => {
+    this.setState({ printType: type }, this.fetchBooklist);
+    console.log(`this.state.printType value: ${this.state.printType}`);
+  };
 
   //componentDidMount - fetch request method goes here - remove from individual components
 
@@ -246,29 +281,31 @@ class App extends Component {
     return (
       <div className="app">
         <h1>Book Search</h1>
-        <SearchBar 
-          books={this.state.books}
-          search={this.state.search}
-          setSearch={(term) => this.setSearch(term)}
-          setBooks={(array) => this.setBooks(array)}
+        <SearchBar
+          handleSearch={this.handleSearch}
+          fetchBooklist={this.fetchBooklist}  
+          // books={this.state.books}
+          // search={this.state.search}
+          // setSearch={term => this.setSearch(term)}
+          // setBooks={array => this.setBooks(array)}
         />
-        <PrintType 
-          books={this.state.books}
-          search={this.state.search}
-          printType={this.state.printType}
-          setBooks={(array) => this.setBooks(array)}
-          setType={(type) => this.setType(type)}
+        <PrintType
+          handlePrintType={this.handlePrintType}
+          // books={this.state.books}
+          // search={this.state.search}
+          // printType={this.state.printType}
+          // setBooks={array => this.setBooks(array)}
+          // setType={type => this.setType(type)}
         />
         <Filter
-          books={this.state.books}
-          search={this.state.search}
-          filter={this.state.filter}
-          setBooks={(array) => this.setBooks(array)}
-          setFilter={(filter) => this.setFilter(filter)}
-         />
-        <BookList 
-          books={this.state.books}
+          // books={this.state.books}
+          // search={this.state.search}
+          // filter={this.state.filter}
+          handleFilter={this.handleFilter}
+          // setBooks={array => this.setBooks(array)}
+          // setFilter={filter => this.setFilter(filter)}
         />
+        <BookList books={this.state.books} />
       </div>
     );
   }
